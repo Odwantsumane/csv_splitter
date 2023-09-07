@@ -8,6 +8,9 @@
     <title>Split_Students_by_campus</title>
 </head>
 <body class="container">
+    <% if(pop) { %>
+        <%- include('popup.ejs') %>
+    <% } %>
     <section class="mb-5">
         <h4 class="mt-2 mb-3">Upload Excel File</h4>
     
@@ -16,62 +19,5 @@
             <input class="form-control" type="submit">
         </form>
     </section>
-
-    <section class="w-25">
-        <label for="browser" class="form-label"><h4>Select Campus from the list:</h4></label>
-        <form id="myForm" action="/filter" method="post">
-            <select id="selectedItem" onchange="submitForm()" class="form-control" name="campus">
-                <% for(var i = 0; i< options; i++) { %>
-                    <option  value="<%= 'Campus '+(i+1) %>" name="<%= 'Campus '+(i+1) %>"><%= "Campus " + (i+1) %></option>
-                <% } %>
-            </select>
-        </form>
-    </section>
-    
-    <section>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Campus</th>
-                    <th>FirstName</th>
-                    <th>Surname</th>
-                    <th>Gender</th>
-                    <th>Nu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% campus.forEach(student => { %>
-                    <tr>
-                        <td><%= student.Campus %></td>
-                        <td><%= student.firstName %></td>
-                        <td><%= student.surname %></td>
-                        <td><%= student.gender %></td>
-                        <td><%= student['Nu.'] %></td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    </section>
-    
-
-    <script>
-        var form = document.getElementById("myForm");
-        var selected = document.getElementById("selectedItem");
-
-        function submitForm() {
-            
-            // store selected campus in localstorage
-            localStorage.setItem(`${selected.name}`, selected.value);
-
-            form.submit();
-        }
-
-        // get the campus from localstorage
-        if (localStorage.getItem(`${selected.name}`)) {
-                selected.options[localStorage.getItem(selected.name)].selected = true;
-                localStorage.clear();
-        }
-        
-    </script>
 </body>
 </html>

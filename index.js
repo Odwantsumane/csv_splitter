@@ -21,16 +21,16 @@ app.use(express.static(path.join(__dirname,'public')));
 const campuses = [];
 
 app.get("/", (req, res) => {
-    res.render("index", { campus: filter_by_campus("Campus 1"), options: No_of_options()}); // default
+    res.render("index", {pop: false}); // default
 })
 
-app.post("/filter", (req, res) => {
+app.get('/filter', (req, res) => {
+    res.render("display-students", { campus: filter_by_campus("Campus 1"), options: No_of_options()});
+})
+
+app.post('/filter', (req, res) => {
     
-    // when default
-    if(req.body.campus === "Campus 1")
-        res.redirect("/");
-    else 
-        res.render("index", { campus: filter_by_campus(req.body.campus), options: No_of_options()});
+    res.render("display-students", { campus: filter_by_campus(req.body.campus), options: No_of_options()});
 })
 
 
@@ -60,16 +60,16 @@ app.post("/upload", (req, res) => {
         
         // check for acceptable file type
         if (!(mimetype === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || mimetype === "text/csv")) {
-            res.send('<h4 style="color: red">Upload Unsuccessful</h4>Only excel files allowed');
-            res.end();
+            res.render("index", {pop: true});
+           
         } else {
             // move file to public folder
-            var newpath = 'C:/Users/user1/Documents/Develop/public/' + files.csvFile[0].originalFilename;
+            var newpath = './public/' + files.csvFile[0].originalFilename;
             fs.rename(oldpath, newpath, function (err) {
                 if (err) throw err;
-                res.send('<h3>File Uploaded Successfully</h3><br><a href="/">Back</a>');
-                res.end();
+                console.log("file uploaded and moved successfully")
             });
+            res.redirect('/filter');
 
             separate_stud_by_campus(newpath);
         }
