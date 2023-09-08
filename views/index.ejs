@@ -12,11 +12,11 @@
         <%- include('popup.ejs') %>
     <% } %>
     <section class="mb-5">
-        <h4 class="mt-2 mb-3">Upload Excel File</h4>
+        <h4 class="mt-2 mb-3" style="text-align: center;">Upload Excel File</h4>
     
-        <form class="form-control" action="/upload" method="post" enctype="multipart/form-data">
-            <input class="form-control p-2" type="file" name="csvFile" required>
-            <input class="form-control" type="submit">
+        <form class="form-control justify-content-center" style="text-align: center;" action="/upload" method="post" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="csvFile" required><br>
+            <button class="btn btn-outline-secondary" type="submit" style="text-align: center;">Upload File</button>
         </form>
     </section>
 </body>
