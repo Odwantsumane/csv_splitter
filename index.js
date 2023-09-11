@@ -20,17 +20,30 @@ app.use(express.static(path.join(__dirname,'public')));
 // temp campus storage
 const campuses = [];
 
+function display_data() {
+    const csvPath = './public/students.csv';
+    try {
+        XLSX.readFile(csvPath);
+
+        //
+        separate_stud_by_campus(csvPath);
+    } catch (e) {
+        console.log("error");
+    }
+}
+
+
 app.get("/", (req, res) => {
     res.render("index", {pop: false}); // default
 })
 
 app.get('/filter', (req, res) => {
-    res.render("display-students", { campus: filter_by_campus("Campus 1"), options: No_of_options()});
+    res.render("display-students", { campus: filter_by_campus("Campus 1"), options: No_of_options(), campusName: "Campus 1_students"});
 })
 
 app.post('/filter', (req, res) => {
     
-    res.render("display-students", { campus: filter_by_campus(req.body.campus), options: No_of_options()});
+    res.render("display-students", { campus: filter_by_campus(req.body.campus), options: No_of_options(), campusName: req.body.campus + "_students"});
 })
 
 
@@ -63,8 +76,10 @@ app.post("/upload", (req, res) => {
             res.render("index", {pop: true});
            
         } else {
+
             // move file to public folder
-            var newpath = './public/' + files.csvFile[0].originalFilename;
+            newpath = './public/' + "students.csv";
+
             fs.rename(oldpath, newpath, function (err) {
                 if (err) throw err;
                 console.log("file uploaded and moved successfully")
@@ -80,6 +95,7 @@ app.post("/upload", (req, res) => {
 const separate_stud_by_campus = (newpath) => {
     
     // Load your Excel file
+
     const workbook = XLSX.readFile(newpath);
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
@@ -117,8 +133,10 @@ const separate_stud_by_campus = (newpath) => {
     
     // console.log('Separate Excel files have been created for each campus.');
     campuses.push(studentsByCampus);
-         
+    
+    return true;
 }
+display_data();
 
 app.listen(4000, () => {
     console.log("running on http://localhost:4000");

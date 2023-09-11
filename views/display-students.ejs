@@ -8,16 +8,24 @@
     <title>display</title>
 </head>
 <body class="container">
-
-    <section class="w-25 mt-2">
+    <a href="/" class="btn btn-outline-secondary m-2">Back</a>
+    <section class="w-50 mt-2">
         <label for="browser" class="form-label mb-2"><h4>Filter by campus:</h4></label>
-        <form id="filter" class="mb-2" action="/filter" method="post">
-            <select id="selectedItem" onchange="submitForm()" class="form-control" name="campus">
-                <% for(var i = 0; i< options; i++) { %>
-                    <option  value="<%= 'Campus '+(i+1) %>" name="<%= 'Campus '+(i+1) %>"><%= "Campus " + (i+1) %></option>
-                <% } %>
-            </select>
-        </form>
+        <div class="d-flex justify-content-left">
+            <div class="m-2">
+                <form id="filter" class="mb-2" action="/filter" method="post">
+                    <select id="selectedItem" onchange="submitForm()" class="form-control w-100" name="campus">
+                        <% for(var i = 0; i< options; i++) { %>
+                            <option  value="<%= 'Campus '+(i+1) %>" name="<%= 'Campus '+(i+1) %>"><%= "Campus " + (i+1) %></option>
+                        <% } %>
+                    </select>
+                </form>
+            </div>
+            <div class="m-2">
+                <a href="campuses/<%= campusName %>.xlsx" class="btn btn-primary" download>Download <%= campusName %> Data</a>
+            </div>
+        </div>
+        
     </section>
 
     <section>
