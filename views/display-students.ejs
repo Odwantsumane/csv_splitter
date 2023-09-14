@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a2e9aaee12.js" crossorigin="anonymous"></script>
     <title>display</title>
 </head>
 <body class="container">
@@ -22,7 +25,7 @@
                 </form>
             </div>
             <div class="m-2">
-                <a href="campuses/<%= campusName %>.xlsx" class="btn btn-primary" download>Download <%= campusName %> Data</a>
+                <a href="campuses/<%= campusName %>.xlsx" class="btn btn-outline-success" download>Download <%= campusName %></a>
             </div>
         </div>
         
@@ -37,6 +40,7 @@
                     <th>Surname</th>
                     <th>Gender</th>
                     <th>Nu</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +51,17 @@
                         <td><%= student.surname %></td>
                         <td><%= student.gender %></td>
                         <td><%= student['Nu.'] %></td>
+                        <td><div class="dropdown dropend">
+                             
+                            <i style="font-size:24px; cursor: pointer;" class="fa" data-bs-toggle="dropdown">&#xf142;</i>
+                             
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Update</a></li>
+                              <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                            </ul>
+                          </div>
+                        </td>
+                         
                     </tr>
                 <% }) %>
             </tbody>
