@@ -46,6 +46,18 @@ app.post('/filter', (req, res) => {
     res.render("display-students", { campus: filter_by_campus(req.body.campus), options: No_of_options(), campusName: req.body.campus + "_students"});
 })
 
+app.post('/filter/search', (req, res) => {
+    // console.log(req.body.searchData);
+    res.render("display-students", { campus: search_by_name(filter_by_campus("Campus 1"), req.body.searchData), options: No_of_options(), 
+        campusName: "Campus 1" + "_students"});
+})
+
+app.get('/filter/search/:searchData', (req, res) => {
+     
+    res.render("searchData", { campus: search_by_name(filter_by_campus(req.params.searchData.split("+")[1].replace("_", " ")), req.params.searchData.split("+")[0]), options: No_of_options(), 
+    campusName: "Campus 1" + "_students"});
+})
+
 
 function filter_by_campus(campus) {
     if(campuses.length === 0) {
@@ -136,6 +148,22 @@ const separate_stud_by_campus = (newpath) => {
     
     return true;
 }
+
+const search_by_name = (students_campus, input) => {
+    const campus = students_campus;
+    var result = [];
+
+    // searching by name
+    campus.forEach(student => {
+        
+        if(student.firstName.toLowerCase().replace(" ","_").includes(input.toLowerCase())) {
+            result.push(student);
+        }
+    })
+
+    return result;
+}
+
 display_data();
 
 app.listen(4000, () => {

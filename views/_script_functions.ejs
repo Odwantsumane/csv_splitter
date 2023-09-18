@@ -1,0 +1,35 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var form = document.getElementById("filter");
+        var searchForm = document.getElementById("searchForm");
+        var searchField = document.getElementById("searchField");
+        var selected = document.getElementById("selectedItem");
+
+        function submitForm() {
+            
+            // store selected campus in localstorage
+            localStorage.setItem(`${selected.name}`, selected.value);
+
+            form.submit();
+        }
+
+        // searchField.addEventListener('input', (e) => {
+        //     e.preventDefault();
+        //     // store search field value
+        //     localStorage.setItem('searchField', searchField.value);
+        //     searchForm.submit();
+        // })
+
+        // get the campus from localstorage
+        if (localStorage.getItem(`${selected.name}`)) {
+                selected.options[localStorage.getItem(selected.name)].selected = true;
+                localStorage.clear();
+        }
+        
+        function loadOnePart() {
+            // localStorage.setItem('searchField', searchField.value);
+
+            jQuery('#toload').load(`/filter/search/${searchField.value.replace(" ","_") + "+" + selected.value.replace(" ","_")}`);
+        }
+        
+    </script>
