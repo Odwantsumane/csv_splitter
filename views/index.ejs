@@ -103,19 +103,12 @@
         })
 
         function settings() {
-            // localStorage.setItem('searchField', searchField.value);
 
             jQuery('#home').load(`/settings`);
         }
 
         function hideForm() {
-            // localStorage.setItem('searchField', searchField.value);
-
-            // jQuery('#form').load(`/hideForm`);
-            // document.getElementById('home').style.width = "77%";
-            // document.getElementById('form').style.width = "5%";
-
-            
+ 
             if(form_visibility) {
                 form_visibility = false;
 
@@ -138,19 +131,9 @@
                 document.getElementById('showBtn').style.display = "none";
                 document.getElementById('hideBtn').style.display = "flex";
             }
-            
-            
-            // document.getElementById('showBtn').style.display = 'block';
-
-
         }
 
         function showForm() {
-            // localStorage.setItem('searchField', searchField.value);
-
-            // jQuery('#form').load(`/showForm`);
-            // document.getElementById('home').style.width = "50%";
-            // document.getElementById('form').style.width = "33%";
 
             myHome.style.transition = '.3s';
             myHome.style.width = "50%";
@@ -158,9 +141,7 @@
             setTimeout(function() {
                 myForm.style.width = "33%";
                 myForm.style.display = 'block';
-            }, 300);
-
-            
+            }, 300);  
         }
 
     </script>
