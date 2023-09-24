@@ -1,0 +1,45 @@
+<h4 class="mt-1 card p-2 text-white" style="text-align: center; background-color: rgb(35, 88, 35);">Upload Excel File</h4>
+<% if(pop) { %>
+    <%- include('popup.ejs') %>
+<% } %>
+<form class="form-control justify-content-center bg-light ms-1" style="text-align: center;" action="/upload" method="post" enctype="multipart/form-data">
+    <div class="flex-content-column">
+        <div class="flex-content-row">
+            <div><select name="save-locations" id="save-locations" class="form-control">
+                    <option value="">Select alternative save location</option>
+                    <option value="Google Drive">Google Drive</option>
+                    <option value="File System">File System</option>
+                    <option value="Somewhere else">Elsewhere</option>
+                </select>
+            </div>
+            <input class="mt-1 ms-1 form-control w-50" type="email" name="email" id="email" placeholder="enter your email" style="display: none;">
+            <input class="mt-1 ms-1 form-control w-50" type="text" name="path" id="path" placeholder="C:/file/path" style="display: none;">
+        </div>
+        <div class="flex-content-row">
+            <div class="m-1">
+                <select name="out-format" id="out-format" class="form-control">
+                    <option value="">Select output format</option>
+                    <option value="csv">csv</option>
+                    <option value="xlsx">xlsx</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex-content-row">
+            <div class="m-1"><input type="text" class="form-control" placeholder="* column name" required></div>
+            <div class="m-1"><input type="number" class="form-control" placeholder="number of rows"></div>
+        </div>
+        <div class="flex-content-row">
+            <div class="m-1"><input class="form-control" type="file" name="csvFile" required></div> 
+        </div>
+    </div>
+                    
+    <button class="btn btn-success" type="submit" style="text-align: center;">Upload File</button>
+
+    <p class="mt-1" id="note"><strong>Note:</strong> <span id="note-message" class="text-muted">where you have not made a selection you get default</span></p>
+</form>
+<div class="share mt-3" style="text-align: center;">
+    <a href="#"><i class="fa fa-facebook-official" aria-hidden="true" style="font-size: 24px;"></i></a>
+    <a href="#"><i class="fa fa-twitter" aria-hidden="true" style="font-size: 24px;"></i></a>
+    <a href="#"><i class="fa fa-instagram" aria-hidden="true" style="color: rgb(210, 15, 119); font-size: 24px;"></i></a>
+    <a href="#"><i class="fa fa-whatsapp" aria-hidden="true" style="color:rgb(0, 175, 0); font-size: 24px;"></i></a>
+</div>

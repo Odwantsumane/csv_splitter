@@ -58,6 +58,18 @@ app.get('/filter/search/:searchData', (req, res) => {
     campusName: "Campus 1" + "_students"});
 })
 
+app.get("/settings", (req, res) => {
+    res.render("settings"); // default
+})
+
+app.get("/hideForm", (req, res) => {
+    res.render("_hiddenForm"); // default
+})
+
+app.get("/showForm", (req, res) => {
+    res.render("formData", {pop: false}); // default
+})
+
 
 function filter_by_campus(campus) {
     if(campuses.length === 0) {
