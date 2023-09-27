@@ -12,36 +12,36 @@
         <div class="flex-content-row w-100" style="overflow-y: scroll;">
             <section style="" class="" id="nav-section">
                 <div class="card m-2 bg-light">
-                    <a href="/" class="btn btn-success p-3" style="text-align: start;"><i style='font-size:24px' class='fas'>&#xf015;</i> 
+                    <a href="/" class="btn btn-success p-3" style="text-align: start;"><i class="fa fa-home" aria-hidden="true" style='font-size:24px'></i> 
                         <span class="ms-3">Home</span></a>
                 </div>
                 <div class="card m-2 bg-light">
-                    <a href="/filter" class="btn btn-success p-3" style="text-align: start;"><i style='font-size:24px' class='fas'>&#xf518;</i> 
+                    <a href="/filter" class="btn btn-success p-3" style="text-align: start;"><i class='fas fa-book-open' style='font-size:24px'></i> 
                         <span class="ms-3">View data</span></a>
                 </div>
                 <div class="card m-2 bg-light">
-                    <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="settings()"><i style='font-size:24px' class='fas'>&#xf085;</i> 
+                    <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="settings()"><i class='fas fa-cogs' style='font-size:24px' aria-hidden="true"></i> 
                         <span class="ms-3">Settings</span></a>
                 </div>
                 <section >
                     <div class="card m-2 bg-light" id="showBtn">
-                        <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="hideForm()"><i class="fa fa-toggle-off" aria-hidden="true"></i> 
+                        <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="hideForm()"><i class="fa fa-toggle-off" aria-hidden="true" style='font-size:24px'></i> 
                             <span class="ms-3">Show Form</span></a>
                     </div>
 
                     <div class="card m-2 bg-light" id="hideBtn" >
-                        <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="hideForm()"><i class="fa fa-toggle-on" aria-hidden="true"></i> 
+                        <a type="button" class="btn btn-success p-3" style="text-align: start;" onclick="hideForm()"><i class="fa fa-toggle-on" aria-hidden="true" style='font-size:24px'></i> 
                             <span class="ms-3">Hide Form</span></a>
                     </div>
                 </section>
                 
             </section>
             
-            <section class="home" id="home">
-                <div class="shadow p-3 mb-3">
-                    <p style="text-align: center;">Home</p>
+            <section class="home me-1" id="home">
+                <div class="shadow p-3 mb-3 text-white bg-success">
+                    <h5 style="text-align: center;">Home</h5>
                 </div>
-                <div class="p-2" style="height: 600px;">
+                <div class="p-2" style="height: 600px;" id="home-body">
                     <div class="card w-50" style="overflow: scroll;height: 300px;">
                         <h4 style="text-align: center;" data-bs-toggle="tooltip" title="click on file to download">Files created</h1>
                         <div class="all-files p-2 flex-content-row-sp" >
@@ -87,12 +87,27 @@
         var form_visibility = true;
 
         alt_location.addEventListener('change', (event) => {
-            // console.log(alt_location.value);
-            if(alt_location.value === "Google Drive")
-                email.style.display = 'block';
+             
+            /**
+             * if google drive selected display email field else if
+             * file system is selected display the path field else
+             * display nothing/hide the fields
+             * **/
 
-            if(alt_location.value === "File System")
+            if(alt_location.value === "Google Drive") {
+                email.style.display = 'block';
+                path.style.display = 'none';
+
+            }else if(alt_location.value === "File System") {
                 path.style.display = 'block';
+                email.style.display = 'none';
+
+            } else {
+                email.style.display = 'none';
+                path.style.display = 'none';
+            }
+
+                
         })
 
         email.addEventListener('change', (event) => {
@@ -124,7 +139,6 @@
             } else {
                 form_visibility = true;
 
-                // show form 
                 showForm();
 
                 // turn toggle on
