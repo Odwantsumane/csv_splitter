@@ -6,6 +6,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 const XLSX = require('xlsx');
 var path = require('path');
+const port = 4000;
 
 // set view engine (converts ejs to html)
 app.set('view engine', 'ejs')
@@ -178,6 +179,6 @@ const search_by_name = (students_campus, input) => {
 
 display_data();
 
-app.listen(4000, () => {
+app.listen(port, () => {
     console.log("running on http://localhost:4000");
 })
